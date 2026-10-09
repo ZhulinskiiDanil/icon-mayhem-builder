@@ -11,10 +11,11 @@ export const config = {
   // "owner/name" of the mod's repo: only its pushes are built
   repo: process.env.REPO ?? 'ZhulinskiiDanil/icon-mayhem',
   // Commit statuses on GitHub (Contents: read, Commit statuses: read and write). Empty: no statuses
-  githubToken: process.env.GITHUB_TOKEN ?? '',
-  webhookSecret: process.env.WEBHOOK_SECRET ?? '',
+  githubToken: (process.env.GITHUB_TOKEN ?? '').trim(),
+  // Pasted values often bring a space or a line break along
+  webhookSecret: (process.env.WEBHOOK_SECRET ?? '').trim(),
   // POST /build with this key builds any branch, tag or commit
-  buildKey: process.env.BUILD_KEY ?? '',
+  buildKey: (process.env.BUILD_KEY ?? '').trim(),
   dataDir: process.env.DATA_DIR ?? '/data',
   // Where the build pages are, for the links on GitHub
   publicUrl: (process.env.PUBLIC_URL ?? (publicDomain ? `https://${publicDomain}` : '')).replace(/\/$/, ''),

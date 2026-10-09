@@ -21,17 +21,17 @@ if [ ! -f "$DATA/android-ndk/build/cmake/android.toolchain.cmake" ]; then
   rm "$DATA/ndk.zip"
 fi
 
+# A profile: the CLI wants one before anything else, the builds don't install anywhere
+if ! geode profile list 2>/dev/null | grep -q "Railway"; then
+  mkdir -p "$DATA/gd/geode/mods"
+  geode profile add --name Railway "$DATA/gd/GeometryDash.exe" win < /dev/null
+fi
+
 # Geode SDK
 if [ ! -d "$GEODE_SDK/.git" ]; then
   echo "== Installing the Geode SDK"
   rm -rf "$GEODE_SDK"
   env -u GEODE_SDK geode sdk install "$GEODE_SDK" < /dev/null
-fi
-
-# A profile: the CLI wants one, the builds don't install anywhere
-if ! geode profile list 2>/dev/null | grep -q "Railway"; then
-  mkdir -p "$DATA/gd/geode/mods"
-  geode profile add --name Railway "$DATA/gd/GeometryDash.exe" win < /dev/null
 fi
 
 # The SDK version of the mod, with the loader binaries of each platform
